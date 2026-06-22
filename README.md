@@ -1,22 +1,24 @@
 <div align="center">
-
 # 🌅 Horizon
 
 **Enjoy the News itself. Leave others to Horizon**
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
-[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json&style=flat-square)](https://github.com/astral-sh/uv)
-[![Daily Summary](https://github.com/Thysrael/Horizon/actions/workflows/deploy-docs.yml/badge.svg?style=flat-square)](https://thysrael.github.io/Horizon/)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Thysrael/Horizon?style=flat-square)](https://github.com/Thysrael/Horizon/commits/main)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-![Sources Welcome](https://img.shields.io/badge/📡_sources-welcome-f97316?style=flat-square)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json&style=flat)](https://github.com/astral-sh/uv)
+[![Daily Summary](https://github.com/Thysrael/Horizon/actions/workflows/deploy-docs.yml/badge.svg?style=flat)](https://thysrael.github.io/Horizon/)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Thysrael/Horizon?style=flat)](https://github.com/Thysrael/Horizon/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+![Sources Welcome](https://img.shields.io/badge/📡_sources-welcome-f97316?style=flat)
 <a href="https://hellogithub.com/repository/Thysrael/Horizon" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=7a4b606e28e4477998d35851cf4fdddf&claim_uid=rtjnLkYT7ziQJUG&theme=small" alt="Featured｜HelloGitHub" /></a>
+<br>
+<a href="https://trendshift.io/repositories/22864?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-22864" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/22864/daily" alt="Thysrael%2FHorizon | Trendshift" width="250" height="55"/></a>
+<a href="https://trendshift.io/repositories/22864?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-22864" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/22864/weekly?language=Python" alt="Thysrael%2FHorizon | Trendshift" width="250" height="55"/></a>
 <br>
 
 ![Claude](https://img.shields.io/badge/Claude-f0daba?style=flat-square&logo=anthropic&logoColor=black)
-![GPT](https://img.shields.io/badge/GPT-412991?style=flat-square)
+![GPT](https://img.shields.io/badge/GPT-412991?style=flat-square&logo=openai&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat-square&logo=google&logoColor=white)
-![DeepSeek](https://img.shields.io/badge/DeepSeek-0A6DC2?style=flat-square)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-0A6DC2?style=flat-square&logo=deepseek&logoColor=white)
 ![Doubao](https://img.shields.io/badge/Doubao-00D6C2?style=flat-square)
 ![MiniMax](https://img.shields.io/badge/MiniMax-FF6F00?style=flat-square)
 ![OpenClaw](https://img.shields.io/badge/OpenClaw-C83232?style=flat-square)
