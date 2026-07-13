@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import json
-import os
 import re
-import tempfile
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
+
+from .._file_utils import _atomic_write_text
 
 
 STAGES = {
@@ -21,26 +21,6 @@ STAGES = {
 }
 RUN_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 LANGUAGE_RE = re.compile(r"^[A-Za-z0-9_-]+$")
-
-
-def _atomic_write_text(path: Path, content: str) -> None:
-    """Write text via a same-directory temporary file and atomic replacement."""
-    temp_path: Path | None = None
-    try:
-        with tempfile.NamedTemporaryFile(
-            mode="w",
-            encoding="utf-8",
-            dir=path.parent,
-            prefix=f".{path.name}.",
-            suffix=".tmp",
-            delete=False,
-        ) as temp_file:
-            temp_path = Path(temp_file.name)
-            temp_file.write(content)
-        os.replace(temp_path, path)
-    finally:
-        if temp_path is not None:
-            temp_path.unlink(missing_ok=True)
 
 
 @dataclass

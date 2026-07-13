@@ -6,9 +6,16 @@ from pathlib import Path
 from types import SimpleNamespace
 import json
 
-from src.models import ContentItem, SourceType
+from src.models import ContentItem, FilteringConfig, SourceType
+from src.ai.summarizer import DailySummarizer
 from src.mcp.server import hz_get_metrics
 from src.mcp.service import HorizonPipelineService
+from src.orchestrator import (
+    BalancedDigestResult,
+    FetchReport,
+    HorizonOrchestrator,
+    SourceFetchOutcome,
+)
 from src.services.webhook import WebhookDeliveryResult, WebhookDeliveryStatus
 
 
@@ -151,7 +158,57 @@ def test_fetch_items_uses_public_orchestrator_api(tmp_path: Path, monkeypatch) -
     assert service.run_store.load_items(result["run_id"], "raw")[0]["id"] == "item-1"
 
 
-def test_filter_items_uses_public_topic_dedup_api(tmp_path: Path, monkeypatch) -> None:
+def test_fetch_items_includes_fetch_report_in_response_and_metadata(
+    tmp_path: Path, monkeypatch
+) -> None:
+    service = HorizonPipelineService(runs_root=tmp_path / "mcp-runs")
+    config_path = tmp_path / "config.json"
+
+    monkeypatch.setattr(
+        service,
+        "_build_context",
+        lambda **kwargs: (
+            SimpleNamespace(
+                horizon_path=tmp_path,
+                config_path=config_path,
+                runtime=SimpleNamespace(),
+                config=SimpleNamespace(),
+            ),
+            ["rss", "github"],
+            [],
+        ),
+    )
+    monkeypatch.setattr("src.mcp.service.make_storage", lambda runtime, config_path: object())
+
+    class FakeOrchestrator:
+        last_fetch_report = FetchReport(
+            [
+                SourceFetchOutcome("RSS Feeds", "success", [make_item("item-1")]),
+                SourceFetchOutcome("GitHub", "failure", error="RuntimeError: down"),
+            ]
+        )
+
+        async def fetch_all_sources(self, since):  # type: ignore[no-untyped-def]
+            return [make_item("item-1")]
+
+        def merge_cross_source_duplicates(self, items):  # type: ignore[no-untyped-def]
+            return items
+
+    monkeypatch.setattr(
+        "src.mcp.service.make_orchestrator",
+        lambda runtime, config, storage: FakeOrchestrator(),
+    )
+
+    result = asyncio.run(service.fetch_items(hours=6))
+
+    assert result["fetch_status"] == "partial_failure"
+    assert result["fetch_report"]["failed"] == 1
+    assert result["fetch_report"]["sources"][1]["source"] == "GitHub"
+    assert result["meta"]["fetch_status"] == "partial_failure"
+    assert service.run_store.load_meta(result["run_id"])["fetch_report"] == result["fetch_report"]
+
+
+def test_filter_items_uses_public_filtering_pipeline_api(tmp_path: Path, monkeypatch) -> None:
     service = HorizonPipelineService(runs_root=tmp_path / "mcp-runs")
     service.run_store.create_run("run-topic-dedup")
 
@@ -170,8 +227,16 @@ def test_filter_items_uses_public_topic_dedup_api(tmp_path: Path, monkeypatch) -
     monkeypatch.setattr("src.mcp.service.make_storage", lambda runtime, config_path: object())
 
     class FakeOrchestrator:
-        async def merge_topic_duplicates(self, items):  # type: ignore[no-untyped-def]
-            return items[:1]
+        async def filter_items(self, items, **kwargs):  # type: ignore[no-untyped-def]
+            assert kwargs == {"threshold": 7.0, "topic_dedup": True, "log": False}
+            kept = items[:1]
+            return SimpleNamespace(
+                items=kept,
+                threshold_count=2,
+                topic_dedup_count=1,
+                topic_dedup_removed=1,
+                balanced_digest=BalancedDigestResult(items=kept),
+            )
 
     monkeypatch.setattr(
         "src.mcp.service.make_orchestrator",
@@ -209,9 +274,20 @@ def test_filter_items_applies_balanced_digest(tmp_path: Path, monkeypatch) -> No
     monkeypatch.setattr("src.mcp.service.make_storage", lambda runtime, config_path: object())
 
     class FakeOrchestrator:
-        def apply_balanced_digest(self, items, log=True):  # type: ignore[no-untyped-def]
-            assert log is False
-            return SimpleNamespace(items=items[:1], group_counts={"other": 1})
+        async def filter_items(self, items, **kwargs):  # type: ignore[no-untyped-def]
+            assert kwargs == {"threshold": 7.0, "topic_dedup": False, "log": False}
+            kept = items[:1]
+            return SimpleNamespace(
+                items=kept,
+                threshold_count=2,
+                topic_dedup_count=2,
+                topic_dedup_removed=0,
+                balanced_digest=BalancedDigestResult(
+                    items=kept,
+                    enabled=True,
+                    group_counts={"other": 1},
+                ),
+            )
 
     monkeypatch.setattr(
         "src.mcp.service.make_orchestrator",
@@ -228,7 +304,69 @@ def test_filter_items_applies_balanced_digest(tmp_path: Path, monkeypatch) -> No
     assert result["group_counts"] == {"other": 1}
 
 
-def test_generate_summary_persists_empty_summary_without_summarizer(
+def test_filter_items_matches_native_filtering_pipeline(tmp_path: Path, monkeypatch) -> None:
+    service = HorizonPipelineService(runs_root=tmp_path / "mcp-runs")
+    service.run_store.create_run("run-parity")
+    filtering = FilteringConfig(ai_score_threshold=7.0, max_items=1)
+    config = SimpleNamespace(filtering=filtering)
+    items = [
+        make_item("mid", score=8.0),
+        make_item("top", score=10.0),
+        make_item("low", score=6.0),
+        make_item("second", score=9.0),
+    ]
+
+    def make_filtering_orchestrator() -> HorizonOrchestrator:
+        orchestrator = HorizonOrchestrator.__new__(HorizonOrchestrator)
+        orchestrator.config = config
+
+        async def merge_topic_duplicates(input_items, *, log=True):  # type: ignore[no-untyped-def]
+            assert log is False
+            return input_items[::2]
+
+        orchestrator.merge_topic_duplicates = merge_topic_duplicates  # type: ignore[method-assign]
+        return orchestrator
+
+    native_result = asyncio.run(
+        make_filtering_orchestrator().filter_items(items, topic_dedup=True, log=False)
+    )
+    monkeypatch.setattr(
+        service,
+        "_load_stage_items",
+        lambda **kwargs: (
+            items,
+            SimpleNamespace(
+                runtime=SimpleNamespace(),
+                config_path=tmp_path / "config.json",
+                config=config,
+            ),
+        ),
+    )
+    monkeypatch.setattr("src.mcp.service.make_storage", lambda runtime, config_path: object())
+    monkeypatch.setattr(
+        "src.mcp.service.make_orchestrator",
+        lambda runtime, loaded_config, storage: make_filtering_orchestrator(),
+    )
+
+    mcp_result = asyncio.run(service.filter_items(run_id="run-parity"))
+
+    assert [item.id for item in native_result.items] == ["top"]
+    assert native_result.threshold_count == 3
+    assert native_result.topic_dedup_count == 2
+    assert native_result.topic_dedup_removed == 1
+    assert mcp_result["kept"] == len(native_result.items)
+    assert mcp_result["removed_by_topic_dedup"] == native_result.topic_dedup_removed
+    assert mcp_result["removed_by_balanced_digest"] == (
+        native_result.topic_dedup_count - len(native_result.items)
+    )
+    assert mcp_result["balanced_digest_enabled"] == native_result.balanced_digest.enabled
+    assert mcp_result["group_counts"] == native_result.balanced_digest.group_counts
+    assert [
+        item["id"] for item in service.run_store.load_items("run-parity", "filtered")
+    ] == [item.id for item in native_result.items]
+
+
+def test_generate_summary_persists_informative_empty_summary(
     tmp_path: Path, monkeypatch
 ) -> None:
     service = HorizonPipelineService(runs_root=tmp_path / "mcp-runs")
@@ -236,15 +374,11 @@ def test_generate_summary_persists_empty_summary_without_summarizer(
     service.run_store.save_items("run-empty", "raw", [])
     service.run_store.save_items("run-empty", "filtered", [])
 
-    class UnexpectedSummarizer:
-        def __init__(self) -> None:
-            raise AssertionError("summarizer must not be constructed for empty input")
-
     monkeypatch.setattr(
         service,
         "_build_context",
         lambda **kwargs: (
-            SimpleNamespace(runtime=SimpleNamespace(DailySummarizer=UnexpectedSummarizer)),
+            SimpleNamespace(runtime=SimpleNamespace(DailySummarizer=DailySummarizer)),
             [],
             [],
         ),
@@ -256,9 +390,15 @@ def test_generate_summary_persists_empty_summary_without_summarizer(
         )
     )
 
+    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    expected = asyncio.run(
+        DailySummarizer().generate_summary([], date_str, 0, language="en")
+    )
+    persisted = Path(result["summary_path"]).read_text(encoding="utf-8")
+
     assert result["items_used"] == 0
-    assert result["preview"] == ""
-    assert Path(result["summary_path"]).read_text(encoding="utf-8") == ""
+    assert persisted == expected
+    assert result["preview"] == expected[:1200]
 
 
 def test_run_pipeline_skips_enrichment_when_filter_is_empty(

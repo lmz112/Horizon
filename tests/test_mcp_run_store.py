@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-import src.mcp.run_store as run_store_module
+import src._file_utils as file_utils
 from src.mcp.run_store import RunStore
 
 
@@ -124,7 +124,7 @@ def test_replace_failure_preserves_destination_and_cleans_temp(
     def fail_replace(source, target):
         raise OSError("replace failed")
 
-    monkeypatch.setattr(run_store_module.os, "replace", fail_replace)
+    monkeypatch.setattr(file_utils.os, "replace", fail_replace)
 
     with pytest.raises(OSError, match="replace failed"):
         save(store, run_id)

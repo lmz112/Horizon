@@ -1,7 +1,7 @@
 import json
 import pytest
 from pathlib import Path
-import src.storage.manager as storage_module
+import src._file_utils as file_utils
 from src.storage.manager import StorageManager, ConfigError, _expand_env_vars, safe_output_path
 from src.models import AIConfig
 from pydantic import ValidationError
@@ -162,7 +162,7 @@ def test_save_daily_summary_replace_failure_preserves_destination(tmp_path, monk
     def fail_replace(source, target):
         raise OSError("replace failed")
 
-    monkeypatch.setattr(storage_module.os, "replace", fail_replace)
+    monkeypatch.setattr(file_utils.os, "replace", fail_replace)
 
     with pytest.raises(OSError, match="replace failed"):
         storage.save_daily_summary("2026-07-13", "replacement")
@@ -177,7 +177,7 @@ def test_save_subscribers_replace_failure_preserves_destination(tmp_path, monkey
     def fail_replace(source, target):
         raise OSError("replace failed")
 
-    monkeypatch.setattr(storage_module.os, "replace", fail_replace)
+    monkeypatch.setattr(file_utils.os, "replace", fail_replace)
 
     subscribers_path = tmp_path / "subscribers.json"
     subscribers_path.write_text('["old"]', encoding="utf-8")
