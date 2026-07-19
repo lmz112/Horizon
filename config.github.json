@@ -1,0 +1,159 @@
+{
+  "version": "1.0",
+  "ai": {
+    "provider": "openai",
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com/v1",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "temperature": 0.3,
+    "max_tokens": 4096,
+    "throttle_sec": 0,
+    "analysis_concurrency": 3,
+    "enrichment_concurrency": 2
+  },
+  "sources": {
+    "hackernews": {
+      "enabled": true,
+      "fetch_top_stories": 30,
+      "min_score": 50
+    },
+    "rss": [
+      {
+        "name": "Simon Willison",
+        "url": "https://simonwillison.net/atom/everything/",
+        "enabled": true,
+        "category": "ai-tools"
+      },
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog/rss.xml",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://feeds.feedburner.com/blogspot/gJZg",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "Anthropic Blog",
+        "url": "https://www.anthropic.com/rss/feed.xml",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "Meta AI Blog",
+        "url": "https://ai.meta.com/blog/rss/",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "HuggingFace Blog",
+        "url": "https://huggingface.co/blog/feed.xml",
+        "enabled": true,
+        "category": "ai-tools"
+      }
+    ],
+    "reddit": {
+      "enabled": true,
+      "subreddits": [
+        {
+          "subreddit": "MachineLearning",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 15,
+          "min_score": 20
+        },
+        {
+          "subreddit": "LocalLLaMA",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 15,
+          "min_score": 20
+        }
+      ],
+      "fetch_comments": 3
+    },
+    "github": [
+      {
+        "type": "repo_releases",
+        "owner": "astral-sh",
+        "repo": "uv",
+        "enabled": true
+      },
+      {
+        "type": "user_events",
+        "username": "karpathy",
+        "enabled": true
+      }
+    ],
+    "google_news": {
+      "enabled": false,
+      "query": "artificial intelligence",
+      "language": "en",
+      "country": "US",
+      "max_results": 50,
+      "category": "news"
+    }
+  },
+  "filtering": {
+    "ai_score_threshold": 5.5,
+    "time_window_hours": 24,
+    "max_items": 20,
+    "category_groups": {
+      "ai": {
+        "limit": 8,
+        "categories": ["ai-news", "ai-tools", "machine-learning"]
+      },
+      "open-source": {
+        "limit": 6,
+        "categories": ["open-source", "github"]
+      },
+      "community": {
+        "limit": 6,
+        "categories": ["community", "reddit", "hackernews"]
+      }
+    },
+    "default_group": "other",
+    "default_group_limit": 3
+  },
+  "languages": ["zh", "en"],
+  "webhook": {
+    "enabled": true,
+    "url_env": "HORIZON_WEBHOOK_URL",
+    "delivery": "summary",
+    "overview_position": "first",
+    "platform": "feishu",
+    "layout": "markdown",
+    "fallback_layout": "markdown",
+    "languages": ["zh"],
+    "request_body": {
+      "msg_type": "interactive",
+      "card": {
+        "schema": "2.0",
+        "config": {
+          "wide_screen_mode": true
+        },
+        "header": {
+          "title": {
+            "tag": "plain_text",
+            "content": "🌅 Horizon AI 日报 - #{date}"
+          },
+          "template": "blue"
+        },
+        "body": {
+          "elements": [
+            {
+              "tag": "markdown",
+              "content": "今日共抓取 **#{all_items}** 条资讯，精选 **#{important_items}** 条\n#{summary}"
+            }
+          ]
+        }
+      }
+    },
+    "headers": ""
+  }
+}
