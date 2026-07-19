@@ -15,8 +15,8 @@
   "sources": {
     "hackernews": {
       "enabled": true,
-      "fetch_top_stories": 30,
-      "min_score": 50
+      "fetch_top_stories": 15,
+      "min_score": 150
     },
     "rss": [
       {
@@ -194,7 +194,7 @@
     }
   },
   "filtering": {
-    "ai_score_threshold": 5.5,
+    "ai_score_threshold": 7.0,
     "time_window_hours": 24,
     "max_items": 25,
     "category_groups": {
