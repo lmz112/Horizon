@@ -19,12 +19,6 @@
     },
     "rss": [
       {
-        "name": "Simon Willison",
-        "url": "https://simonwillison.net/atom/everything/",
-        "enabled": true,
-        "category": "ai-tools"
-      },
-      {
         "name": "OpenAI Blog",
         "url": "https://openai.com/blog/rss.xml",
         "enabled": true,
@@ -53,6 +47,108 @@
         "url": "https://huggingface.co/blog/feed.xml",
         "enabled": true,
         "category": "ai-tools"
+      },
+      {
+        "name": "Simon Willison",
+        "url": "https://simonwillison.net/atom/everything/",
+        "enabled": true,
+        "category": "ai-tools"
+      },
+      {
+        "name": "Lilian Weng",
+        "url": "https://lilianweng.github.io/atom.xml",
+        "enabled": true,
+        "category": "agent-research"
+      },
+      {
+        "name": "Sebastian Raschka",
+        "url": "https://sebastianraschka.com/feed.xml",
+        "enabled": true,
+        "category": "model-tech"
+      },
+      {
+        "name": "Mistral Blog",
+        "url": "https://mistral.ai/feed.xml",
+        "enabled": false,
+        "category": "ai-news"
+      },
+      {
+        "name": "arXiv cs.AI 论文",
+        "url": "https://rss.arxiv.org/rss/cs.AI",
+        "enabled": true,
+        "category": "papers"
+      },
+      {
+        "name": "arXiv cs.LG 论文",
+        "url": "https://rss.arxiv.org/rss/cs.LG",
+        "enabled": true,
+        "category": "papers"
+      },
+      {
+        "name": "HuggingFace Daily Papers",
+        "url": "https://huggingface.co/papers.rss",
+        "enabled": true,
+        "category": "papers"
+      },
+      {
+        "name": "知乎热榜",
+        "url": "https://rsshub.app/zhihu/hot",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "知乎日报",
+        "url": "https://rsshub.app/zhihu/daily",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "掘金热榜",
+        "url": "https://rsshub.app/juejin/trending/all/weekly",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "GitHub Trending",
+        "url": "https://rsshub.app/github/trending/daily",
+        "enabled": true,
+        "category": "open-source"
+      },
+      {
+        "name": "V2EX 热门",
+        "url": "https://www.v2ex.com/feed/tab/hot.xml",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "阮一峰的网络日志",
+        "url": "https://www.ruanyifeng.com/blog/atom.xml",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "机器之心",
+        "url": "https://www.jiqizhixin.com/rss",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "36氪",
+        "url": "https://36kr.com/feed",
+        "enabled": true,
+        "category": "chinese-tech"
+      },
+      {
+        "name": "DeepMind Blog",
+        "url": "https://deepmind.google/blog/rss.xml",
+        "enabled": true,
+        "category": "ai-news"
+      },
+      {
+        "name": "Stability AI Blog",
+        "url": "https://stability.ai/blog/rss.xml",
+        "enabled": false,
+        "category": "ai-tools"
       }
     ],
     "reddit": {
@@ -73,6 +169,22 @@
           "time_filter": "day",
           "fetch_limit": 15,
           "min_score": 20
+        },
+        {
+          "subreddit": "OpenAI",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 50
+        },
+        {
+          "subreddit": "artificial",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 50
         }
       ],
       "fetch_comments": 3
@@ -80,19 +192,36 @@
     "github": [
       {
         "type": "repo_releases",
-        "owner": "astral-sh",
-        "repo": "uv",
+        "owner": "langchain-ai",
+        "repo": "langchain",
+        "enabled": true
+      },
+      {
+        "type": "repo_releases",
+        "owner": "microsoft",
+        "repo": "autogen",
+        "enabled": true
+      },
+      {
+        "type": "repo_releases",
+        "owner": "crewAIInc",
+        "repo": "crewAI",
         "enabled": true
       },
       {
         "type": "user_events",
         "username": "karpathy",
         "enabled": true
+      },
+      {
+        "type": "user_events",
+        "username": "ylecun",
+        "enabled": true
       }
     ],
     "google_news": {
-      "enabled": false,
-      "query": "artificial intelligence",
+      "enabled": true,
+      "query": "AI agent OR large language model OR Jensen Huang OR Elon Musk OR artificial intelligence",
       "language": "en",
       "country": "US",
       "max_results": 50,
@@ -102,23 +231,31 @@
   "filtering": {
     "ai_score_threshold": 5.5,
     "time_window_hours": 24,
-    "max_items": 20,
+    "max_items": 25,
     "category_groups": {
-      "ai": {
-        "limit": 8,
-        "categories": ["ai-news", "ai-tools", "machine-learning"]
+      "ai-news": {
+        "limit": 6,
+        "categories": ["ai-news"]
+      },
+      "papers": {
+        "limit": 4,
+        "categories": ["papers"]
       },
       "open-source": {
-        "limit": 6,
+        "limit": 5,
         "categories": ["open-source", "github"]
       },
-      "community": {
-        "limit": 6,
-        "categories": ["community", "reddit", "hackernews"]
+      "agent": {
+        "limit": 5,
+        "categories": ["agent-research", "model-tech"]
+      },
+      "chinese": {
+        "limit": 5,
+        "categories": ["chinese-tech"]
       }
     },
     "default_group": "other",
-    "default_group_limit": 3
+    "default_group_limit": 2
   },
   "languages": ["zh", "en"],
   "webhook": {
