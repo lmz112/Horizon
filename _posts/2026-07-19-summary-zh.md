@@ -5,138 +5,105 @@ date: 2026-07-19
 lang: zh
 ---
 
-> 从 49 条内容中筛选出 6 条重要资讯。
+> 从 39 条内容中筛选出 4 条重要资讯。
 
 ---
 
-1. [LG 显示器通过 Windows Update 静默安装软件](#item-1) ⭐️ 9.0/10
-2. [GPT-5.6 Sol Pro 解决 30 年凸优化猜想](#item-2) ⭐️ 8.0/10
-3. [阿里云发布 HappyOyster 1.0 开放世界模型](#item-3) ⭐️ 7.0/10
-4. [上海发布“星枢计划”首发星座](#item-4) ⭐️ 6.0/10
-5. [Index Ventures 联合创始人预测 AI 财富将重新分配](#item-5) ⭐️ 6.0/10
-6. [AI 在预先授权中：帮助还是阻碍？](#item-6) ⭐️ 6.0/10
+1. [Kimi K3：中国前沿模型挑战美国主导地位](#item-1) ⭐️ 9.0/10
+2. [阿里千问 3.8-Max 预览版上线，即将开源](#item-2) ⭐️ 9.0/10
+3. [OpenAI Codex 重置与 5 小时限制取消](#item-3) ⭐️ 8.0/10
+4. [商汤科技发布 SenseNova U1 Pro 多模态智能体](#item-4) ⭐️ 7.0/10
 
 ---
 
 <a id="item-1"></a>
-## [LG 显示器通过 Windows Update 静默安装软件](https://videocardz.com/newz/lg-monitors-silently-install-software-through-windows-update-without-user-consent) ⭐️ 9.0/10
+## [Kimi K3：中国前沿模型挑战美国主导地位](https://stephen.bochinski.dev/blog/2026/07/18/the-kimi-k3-moment/) ⭐️ 9.0/10
 
-LG 显示器利用 Windows Update，在用户通过 HDMI 连接 LG 显示器时，未经用户同意或通知，静默安装未经请求的软件。 这引发了重大的安全和隐私问题，因为该软件自动安装，拥有完全的系统访问权限且无沙箱隔离，可能允许第三方代码在任何连接 LG 显示器的 Windows PC 上运行。 只要用户通过 HDMI 插入 LG 显示器，软件就会立即安装，即使之前已连接过该显示器，并且每次系统启动时都会运行。该安装通过 Windows Update 的驱动程序交付机制进行，微软信任硬件厂商的此机制。
+中国 AI 公司月之暗面发布了 Kimi K3，一个拥有 2.8 万亿参数、100 万 token 上下文窗口的开源权重模型，其前沿性能可与美国顶级模型媲美。 这标志着中国模型达到与美国前沿模型同等水平的重要里程碑，加剧了 AI 竞争，并引发了关于蒸馏、开源权重和国家安全等议题的辩论。 Kimi K3 采用了名为 Kimi Delta Attention \(KDA\)的混合线性注意力机制和注意力残差，专为软件工程、知识工作和深度推理而设计。
 
-hackernews · baranul · 7月18日 10:21 · [社区讨论](https://news.ycombinator.com/item?id=48956688)
+hackernews · sbochins · 7月18日 17:32 · [社区讨论](https://news.ycombinator.com/item?id=48960218)
 
-**背景**: Windows Update 可以在连接新设备时自动下载并安装来自硬件制造商的驱动程序和关联软件。此功能旨在确保设备正常工作，但可能被滥用来推送不需要的软件。LG 显示器安装的软件并非驱动程序，而是一个具有网络访问权限并在启动时运行的应用。
+**背景**: 知识蒸馏是一种让较小的“学生”模型从较大的“教师”模型输出中学习的技术。开源权重模型允许任何人访问和微调模型权重。Kimi K3 是 2025 年 7 月发布的 Kimi K2 的继任者。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.lg.com/us/support/help-library/lg-monitor-how-to-update-monitor-firmware--20153819322140">LG Monitor - How to Update Monitor Firmware | LG USA Support</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Kimi_%28chatbot%29">Kimi (chatbot) - Wikipedia</a></li>
+<li><a href="https://platform.kimi.ai/docs/guide/kimi-k3-quickstart">Kimi K3 - Kimi API Platform</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Knowledge_distillation">Knowledge distillation - Wikipedia</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区评论表达了愤怒，称该行为类似恶意软件，并批评 LG 和微软。用户分享了通过组策略或设备安装设置禁用自动下载制造商应用的解决方法。一些人认为主要责任在于微软，允许此类未经适当同意的安装。
+**社区讨论**: 评论者就 Kimi K3 的性能是源于蒸馏还是独立创新展开辩论，有人对美国政府的监管和国家安全影响表示担忧。用户 SwellJoe 报告称，在相同任务上，Kimi K3 比 OpenAI 的模型消耗了更多时间和使用额度。
 
-**标签**: `#security`, `#privacy`, `#windows`, `#lg`, `#driver`
+**标签**: `#Kimi K3`, `#frontier model`, `#distillation`, `#AI competition`, `#open-weight`
 
 ---
 
 <a id="item-2"></a>
-## [GPT-5.6 Sol Pro 解决 30 年凸优化猜想](https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/) ⭐️ 8.0/10
+## [阿里千问 3.8-Max 预览版上线，即将开源](https://36kr.com/newsflashes/3902296634050437?f=rss) ⭐️ 9.0/10
 
-据报道，GPT-5.6 Sol Pro 在 148 分钟内解决了一个长期存在的凸优化猜想，填补了该领域 30 年的空白。 这标志着 AI 辅助数学发现的一个重要里程碑，表明大语言模型能够为开放研究问题做出贡献，尽管其真正的新颖性存在争议。 社区分析显示，作者此前已花费一年时间使用早期 GPT 模型（5.4 和 5.5）进行迭代，且提示词中包含了解决问题所用的技术，因此声称的 148 分钟可能具有误导性。
+2025 年 7 月 19 日，阿里发布了千问 3.8-Max 的预览版，已在阿里云 Token Plan、Qoder 及 QoderWork 上线。正式版预计近期开源。 千问 3.8-Max 是阿里最新、最强的大语言模型，在编程和智能体能力上达到领先水平。其即将开源将为 AI 开发者和整个开源社区带来直接价值。 Qwen3.8-Max-Instruct 预览版目前在 Text Arena 排行榜上排名第三，超越了 GPT-5-Chat。正式版将进一步增强编程和智能体能力。
 
-hackernews · mbustamanter · 7月18日 13:00 · [社区讨论](https://news.ycombinator.com/item?id=48957779)
+rss · 36氪 · 7月19日 08:43
 
-**背景**: 凸优化是一类目标函数为凸函数的数学问题，意味着存在唯一的全局最小值。该猜想涉及在球域上优化凸 Lipschitz 函数的时间复杂度上界，是一个小众但真实的贡献。
+**背景**: 千问是阿里系列大语言模型，以强大的多语言和多模态能力著称。千问 3.8-Max 是千问 3 系列中最大的模型，旨在推动推理、编程和智能体任务的性能边界。该模型原生支持 32,768 个 token 的上下文长度，通过 YaRN 扩展可达 131,072 个 token。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://theapplied.co/models/openai-gpt-5-6-sol-pro">GPT-5.6 Sol Pro — AI Model Details | Applied</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Convex_optimization">Convex optimization - Wikipedia</a></li>
+<li><a href="https://qwen.ai/blog?id=qwen3-max">Qwen3-Max: Just Scale it</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen3-8B">Qwen/Qwen3-8B · Hugging Face</a></li>
+<li><a href="https://arxiv.org/pdf/2505.09388">Qwen3 Technical Report - arXiv.org</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 评论指出，作者此前使用早期模型进行了一年工作，且提示词中包含了解决技术，这使得 148 分钟的宣称不那么令人印象深刻。有人认为这表明 AI 可以处理中等难度的果实，但无法处理真正新颖的方法。
-
-**标签**: `#AI`, `#mathematics`, `#convex optimization`, `#machine learning`, `#research`
+**标签**: `#模型发布`, `#开源`, `#Qwen`, `#阿里`
 
 ---
 
 <a id="item-3"></a>
-## [阿里云发布 HappyOyster 1.0 开放世界模型](https://36kr.com/newsflashes/3901954555938437?f=rss) ⭐️ 7.0/10
+## [OpenAI Codex 重置与 5 小时限制取消](https://codex-resets.com/) ⭐️ 8.0/10
 
-阿里云发布了 HappyOyster 1.0，这是一个能够模拟物理世界状态转移的开放世界模型，用户通过一句话或一张图即可生成可互动、可探索的 AI 数字世界。该模型已在阿里云百炼平台开启灰测，并提供 Android、iOS 和 Web 三端 SDK。 这标志着 AI 驱动的世界模拟迈出了重要一步，能够在生成的环境中实现实时交互和因果推理。它可能彻底改变内容创作、游戏和虚拟培训领域，让非专业人士也能构建和探索动态世界。 HappyOyster 1.0 具备世界探索（Adventure）和实时导演（Directing）两大模式。该模型通过学习物理世界状态转移规律，并推演从动作到反馈的因果链，从而保持人物和环境的长程一致性。
+OpenAI Codex 近期频繁重置使用额度，并暂时取消了 5 小时使用限制，用户现在可以累积未使用的重置次数以备后用。 这一变化消除了开发者对使用额度的精打细算，深刻改变了智能体开发工作流，但也引发了对重置依赖性和长期成本可持续性的担忧。 取消 5 小时限制是事故响应的一部分，预计问题解决后将恢复；用户现在会看到“您有 4 次使用额度重置可用”的提示。
 
-rss · 36氪 · 7月19日 03:45
+hackernews · denysvitali · 7月18日 23:24 · [社区讨论](https://news.ycombinator.com/item?id=48963465)
 
-**背景**: 开放世界模型是能够生成和模拟交互式虚拟环境的 AI 系统，常用于游戏和仿真。阿里云百炼是一个模型即服务（MaaS）平台，提供多种 AI 模型的访问。灰测意味着产品仅对部分用户开放，以收集早期反馈。
+**背景**: OpenAI Codex 是一款帮助开发者编写代码的 AI 编程助手。使用额度是 OpenAI 为管理服务器负载和确保公平访问而设置的配额。5 小时限制此前限制了用户在滚动 5 小时窗口内的连续使用。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.ithome.com/0/965/652.htm">阿里发布 世 界 模 型 HappyOyster ...</a></li>
-<li><a href="https://news.pconline.com.cn/2175/21753523.html">阿里发布 世 界 模 型 HappyOyster ...</a></li>
-<li><a href="https://readhub.cn/topic/8u2ch4NuHbm">阿里发布 世 界 模 型 HappyOyster 1 . 0 ，用户可实时探索、导演并重塑 AI...</a></li>
+<li><a href="https://codex-resets.com/">Codex Resets — Usage Limit Reset Tracker</a></li>
+<li><a href="https://community.openai.com/t/clarification-on-the-temporary-removal-of-the-codex-five-hour-limit/1386911">Clarification on the temporary removal of the Codex five-hour ...</a></li>
+<li><a href="https://www.explainx.ai/blog/chatgpt-codex-5-hour-limit-removed-weekly-reset-july-2026">ChatGPT 5-Hour Limit Removed — July 2026 | explainx.ai Blog</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI`, `#open-world model`, `#Alibaba Cloud`, `#product launch`
+**社区讨论**: 开发者反映频繁重置正在将他们锚定到更高的使用基线，有人已在 API 替代方案上花费超过 1 万美元。其他人指出，Claude Code 和 Grok Build 等竞品重置频率较低，而 Google Antigravity 几乎从不重置。
+
+**标签**: `#OpenAI Codex`, `#Agent Workflow`, `#Usage Limits`, `#Cost Analysis`, `#Developer Experience`
 
 ---
 
 <a id="item-4"></a>
-## [上海发布“星枢计划”首发星座](https://36kr.com/newsflashes/3901993231550085?f=rss) ⭐️ 6.0/10
+## [商汤科技发布 SenseNova U1 Pro 多模态智能体](https://36kr.com/newsflashes/3902187700766593?f=rss) ⭐️ 7.0/10
 
-2026 年 7 月 18 日，在世界人工智能大会上，上海正式发布了“星枢计划”的首发星座，该星座由三颗卫星组成，核心是在轨直接处理数据，减少对地面设备的依赖。 这标志着商业太空 AI 计算迈出重要一步，有望为遥感、通信等应用提供更快的数据处理能力。此举使上海在新兴的太空算力产业中占据领先地位，与星链等全球项目形成竞争。 该星座采用“一主二辅”星簇架构，是更大规模计划的一部分，商业运营阶段将完成千星部署。项目由复旦大学和上海星枢天算牵头，四位院士担任首席科学家。
+2026 年 7 月 18 日，商汤科技在世界人工智能大会（WAIC）上正式发布旗舰级多模态智能体基座 SenseNova U1 Pro。该模型定位为面向长程任务的交付级原生多模态智能体基座，实现了理解、生成和行动的深度统一。 SenseNova U1 Pro 标志着从单点内容生成向系统级任务交付的转变，解决了多模态模型‘反复抽卡’的瓶颈。它为开发者构建复杂长程智能体应用提供了实用的基础。 该模型采用原生统一架构（NEO-unify 内核），实现语言与视觉的联合表征，从而无缝集成理解、生成和行动。预览版已开启邀测，正式版及 API 服务预计于 2026 年 8 月上线。
 
-rss · 36氪 · 7月19日 04:00
+rss · 36氪 · 7月19日 06:30
 
-**背景**: 太空算力是将 AI 处理器部署在卫星上，在轨处理数据，相比将数据传回地面站可降低延迟和带宽需求。“星枢计划”旨在建成国内首个标准化在轨分布式计算网络，融合感知、计算和通信功能。
+**背景**: 多模态 AI 模型能够处理和生成多种类型的数据，如文本和图像。传统的多模态模型在处理需要多步骤和一致输出的长程任务时常常遇到困难，导致‘反复抽卡’问题——每次生成都是独立的。SenseNova U1 Pro 旨在通过在一个原生统一架构中融合理解、生成和行动，实现端到端的任务完成。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://finance.sina.com.cn/wm/2026-07-18/doc-iniifnzz8377184.shtml">太空算力大消息！上海发布“星枢计划”新进展_新浪财经_新浪网</a></li>
-<li><a href="https://www.ithome.com/0/978/530.htm">上海发布太空算力星座工程“星枢计划”，商业运营阶段将完成千星部署 - IT之家</a></li>
+<li><a href="https://www.163.com/dy/article/L2576SI705118O92.html">商汤发布旗舰级SenseNova U1 Pro，多模态智能体实现长程任务闭环|工作流|大语言模型|sensenova_网易订阅</a></li>
+<li><a href="https://www.nbd.com.cn/articles/2026-07-18/4476806.html">大模型范式里程碑！商汤科技旗舰级SenseNova U1 Pro正式发布：从“内容生成”走向“系统级交付” | 每经网</a></li>
+<li><a href="https://www.tmtpost.com/8070465.html">商汤发布旗舰级SenseNova U1 Pro，多模态智能体实现长程任务闭环</a></li>
 
 </ul>
 </details>
 
-**标签**: `#space computing`, `#satellite`, `#AI infrastructure`, `#Shanghai`
-
----
-
-<a id="item-5"></a>
-## [Index Ventures 联合创始人预测 AI 财富将重新分配](https://techcrunch.com/2026/07/17/neil-rimer-thinks-the-ai-money-is-coming-back-out/) ⭐️ 6.0/10
-
-Index Ventures 联合创始人 Neil Rimer 预测，硅谷 AI 行业产生的巨额财富将需要重新分配，要么由行业自愿进行，要么通过政府监管实现。 这位知名风险投资家的预测凸显了人们对 AI 加剧财富不平等日益增长的担忧，并可能影响科技领袖和政策制定者未来处理财富分配的方式。 Rimer 没有具体说明重新分配的时间表或机制，但他的言论反映了硅谷关于 AI 创造财富的社会影响的更广泛辩论。
-
-rss · TechCrunch AI · 7月18日 04:47
-
-**背景**: Index Ventures 是一家大型风险投资公司，投资过 Figma、Datadog 和 Robinhood 等公司。AI 热潮为创始人、投资者和员工创造了巨额财富，但批评者认为收益集中在少数人手中，加剧了不平等。随着 AI 自动化工作并集中资本，通过全民基本收入或更高税收等方式进行财富再分配的呼声日益高涨。
-
-**标签**: `#AI`, `#venture capital`, `#wealth redistribution`, `#Silicon Valley`
-
----
-
-<a id="item-6"></a>
-## [AI 在预先授权中：帮助还是阻碍？](https://arstechnica.com/ai/2026/07/will-ai-fix-prior-authorization-or-make-it-worse/) ⭐️ 6.0/10
-
-政府正在试点一个项目，利用 AI 做出保险覆盖决策，特别是医疗保健中的预先授权。 这可能会简化预先授权流程，减少延误和行政负担，但如果 AI 决策有缺陷，则引发对透明度、偏见和患者伤害的担忧。 与医疗 AI 工具不同，保险覆盖算法几乎不受监管，且常被视为商业机密，使得监督困难。
-
-rss · Arstechnica AI · 7月18日 11:18
-
-**背景**: 预先授权是保险公司在提供特定治疗前批准或拒绝覆盖的过程。该过程中的错误可能导致重大财务损失和护理被拒。AI 正被探索用于自动化这些决策，但其在保险中的使用比临床环境受到的监管更少。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://completeaitraining.com/news/how-ai-algorithms-decide-what-health-insurance-will-2/">How AI Algorithms Decide What Health Insurance Will Cover —and...</a></li>
-<li><a href="https://www.linkedin.com/pulse/ai-insurance-balancing-efficiency-ethical-iryna-tetera-eukqf">AI in Insurance : Balancing Efficiency and Ethical Responsibility</a></li>
-<li><a href="https://www.plutushealthinc.com/post/prior-authorization-in-healthcare-overview-purpose-process">End-to-end guide of prior authorization | Plutus Health</a></li>
-
-</ul>
-</details>
-
-**标签**: `#AI`, `#healthcare`, `#policy`, `#insurance`
+**标签**: `#多模态智能体`, `#商汤科技`, `#SenseNova`, `#Agent基座`, `#模型发布`
 
 ---
