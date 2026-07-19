@@ -20,43 +20,39 @@ Respond with valid JSON only:
 
 If there are no duplicates at all, return: {{"duplicates": []}}"""
 
-CONTENT_ANALYSIS_SYSTEM = """You are an expert content curator helping filter important technical and academic information.
+CONTENT_ANALYSIS_SYSTEM = """你是一个 AI/Agent 领域的内容筛选专家，帮助过滤对 Agent 开发者有价值的信息。
 
-Score content on a 0-10 scale based on importance and relevance:
+按 0-10 分评估内容对 AI Agent 工程师的重要性和相关性：
 
-**9-10: Groundbreaking** - Major breakthroughs, paradigm shifts, or highly significant announcements
-- New major version releases of widely-used technologies
-- Significant research breakthroughs
-- Important industry-changing announcements
+**9-10: AI/Agent 重大突破** — 对 Agent 开发者有直接价值
+- 新模型发布（GPT/Claude/Llama/Qwen/DeepSeek 等）
+- 新 Agent 框架、范式或协议
+- 重大研究突破（新架构、训练方法、推理技术）
+- Agent 领域关键人物言论（黄仁勋/马斯克/Karpathy/LeCun/Sam Altman 等）
 
-**7-8: High Value** - Important developments worth immediate attention
-- Interesting technical deep-dives
-- Novel approaches to known problems
-- Insightful analysis or commentary
-- Valuable tools or libraries
+**7-8: 高价值 AI 内容** — 值得立即关注
+- Agent 工程最佳实践和架构设计
+- 模型评测/对比/技术分析
+- 有价值的 AI 工具/库/平台
+- AI 行业深度分析和趋势
 
-**5-6: Interesting** - Worth knowing but not urgent
-- Incremental improvements
-- Useful tutorials
-- Moderate community interest
+**5-6: 一般 AI 信息** — 值得了解但不紧急
+- 渐进式改进和增量更新
+- AI 政策/法规动态
+- 常规 AI 产品更新
+- 科普类 AI 内容
 
-**3-4: Low Priority** - Generic or routine content
-- Minor updates
-- Common knowledge
-- Overly promotional content
+**0-4: 低价值或无关** — 过滤
+- 跟 AI/模型/Agent 无关的通用科技新闻
+- 纯安全/隐私事件（除非与 AI 直接相关）
+- 纯商业/财经新闻（除非有 AI 深度分析）
+- 纯硬件发布（除非与 AI 推理/训练直接相关）
+- 低质量或标题党内容
 
-**0-2: Noise** - Not relevant or low quality
-- Spam or purely promotional
-- Off-topic content
-- Trivial updates
-
-Consider:
-- Technical depth and novelty
-- Potential impact on the field
-- Quality of writing/presentation
-- Relevance to software engineering, AI/ML, and systems research
-- Community discussion quality: insightful comments, diverse viewpoints, and debates increase value
-- Engagement signals: high upvotes/favorites with substantive discussion indicate community-validated importance
+评分说明：
+- DeepSeek R1 等推理模型可以做附加分
+- 社区讨论热度本身不构成高分理由
+- 长度短的内容未必价值低，需判断信息密度
 """
 
 CONTENT_ANALYSIS_USER = """Analyze the following content and provide a JSON response with:
