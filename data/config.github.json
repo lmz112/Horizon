@@ -32,24 +32,6 @@
         "category": "chinese-tech"
       },
       {
-        "name": "GitHub Trending",
-        "url": "https://rsshub-production-2ef6.up.railway.app/github/trending/daily",
-        "enabled": true,
-        "category": "open-source"
-      },
-      {
-        "name": "Reddit MachineLearning",
-        "url": "https://rsshub-production-2ef6.up.railway.app/reddit/hot/MachineLearning",
-        "enabled": true,
-        "category": "agent-research"
-      },
-      {
-        "name": "Reddit LocalLLaMA",
-        "url": "https://rsshub-production-2ef6.up.railway.app/reddit/hot/LocalLLaMA",
-        "enabled": true,
-        "category": "agent-research"
-      },
-      {
         "name": "OpenAI Blog",
         "url": "https://openai.com/blog/rss.xml",
         "enabled": true,
