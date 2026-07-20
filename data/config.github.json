@@ -32,8 +32,8 @@
         "category": "chinese-tech"
       },
       {
-        "name": "GitHub Trending",
-        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+        "name": "GitHub Trends",
+        "url": "https://mshibanami.github.io/GitHubTrendingRSS/weekly/all.xml",
         "enabled": true,
         "category": "open-source"
       },
@@ -221,7 +221,7 @@
         "categories": ["ai-news"]
       },
       "papers": {
-        "limit": 4,
+        "limit": 2,
         "categories": ["papers"]
       },
       "open-source": {
