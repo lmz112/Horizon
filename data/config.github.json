@@ -32,6 +32,12 @@
         "category": "chinese-tech"
       },
       {
+        "name": "GitHub Trending",
+        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+        "enabled": true,
+        "category": "open-source"
+      },
+      {
         "name": "OpenAI Blog",
         "url": "https://openai.com/blog/rss.xml",
         "enabled": true,
